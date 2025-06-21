@@ -78,7 +78,7 @@ export default function MarketsTable() {
   const getAssetIcon = (asset: string, imageUrl: string) => {
     return (
       <div className="relative">
-        <div className="w-10 h-10 rounded-full border-2 border-gray-200 bg-white flex items-center justify-center shadow-sm overflow-hidden">
+        <div className="w-10 h-10 rounded-full border-2 border-gray-300 bg-white flex items-center justify-center shadow-sm overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={imageUrl}
@@ -87,12 +87,11 @@ export default function MarketsTable() {
             height={32}
             className="rounded-full object-cover"
             onError={(e) => {
-              // Fallback to gradient background if image fails to load
               const target = e.target as HTMLImageElement
               target.style.display = 'none'
               const parent = target.parentElement
               if (parent) {
-                parent.className = `w-10 h-10 rounded-full bg-gradient-to-br ${getFallbackColor(asset)} border-2 border-gray-200 flex items-center justify-center text-white text-sm font-bold shadow-sm`
+                parent.className = `w-10 h-10 rounded-full bg-gradient-to-br ${getFallbackColor(asset)} border-2 border-gray-300 flex items-center justify-center text-white text-sm font-bold shadow-sm`
                 parent.textContent = asset
               }
             }}
@@ -115,7 +114,7 @@ export default function MarketsTable() {
   const formatChange = (change: number) => {
     const isPositive = change > 0
     return (
-      <span className={`font-medium ${isPositive ? 'text-green-600' : 'text-red-500'}`}>
+      <span className={`font-semibold text-sm ${isPositive ? 'text-green-700' : 'text-red-600'}`}>
         {isPositive ? '+' : ''}{change.toFixed(1)}%
       </span>
     )
@@ -123,22 +122,22 @@ export default function MarketsTable() {
 
   const formatReturns = (returns: number) => {
     return (
-      <span className="text-green-600 font-medium">
+      <span className="text-green-700 font-semibold text-sm">
         {returns.toFixed(2)}%
       </span>
     )
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <div className="bg-white rounded-xl border border-gray-300 overflow-hidden shadow-sm">
       {/* Header */}
-      <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+      <div className="bg-gray-100 px-6 py-4 border-b border-gray-300">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">Markets</h3>
+          <h3 className="text-xl font-bold text-gray-900">Markets</h3>
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-orange-500"></div>
-              <span className="text-sm font-medium text-blue-600">STEPTIONS STATS</span>
+              <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-600 to-orange-500"></div>
+              <span className="text-sm font-semibold text-blue-700">STEPTIONS STATS</span>
             </div>
           </div>
         </div>
@@ -149,40 +148,40 @@ export default function MarketsTable() {
         <table className="w-full">
           <thead className="bg-gray-50">
           <tr>
-            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
               Asset
             </th>
             <th
-              className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
+              className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:text-gray-900 transition-colors"
               onClick={() => handleSort('price')}
             >
               Price ↓
             </th>
             <th
-              className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
+              className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:text-gray-900 transition-colors"
               onClick={() => handleSort('change24h')}
             >
               24H % ↓
             </th>
             <th
-              className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
+              className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:text-gray-900 transition-colors"
               onClick={() => handleSort('volume24h')}
             >
               24H Volume ↓
             </th>
             <th
-              className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
+              className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:text-gray-900 transition-colors"
               onClick={() => handleSort('tvl')}
             >
               TVL ↓
             </th>
             <th
-              className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
+              className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider cursor-pointer hover:text-gray-900 transition-colors"
               onClick={() => handleSort('steptionsTvl')}
             >
               Steptions TVL ↓
             </th>
-            <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
               Deposit Returns
             </th>
           </tr>
@@ -194,34 +193,34 @@ export default function MarketsTable() {
                 <div className="flex items-center space-x-3">
                   {getAssetIcon(market.asset, market.imageUrl)}
                   <div>
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-base font-bold text-gray-900">
                       {market.asset}
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-sm font-medium text-gray-600">
                       Cryptocurrency
                     </div>
                   </div>
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
+              <td className="px-6 py-4 whitespace-nowrap text-base font-bold text-gray-900">
                 {market.price}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm">
+              <td className="px-6 py-4 whitespace-nowrap">
                 {formatChange(market.change24h)}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <td className="px-6 py-4 whitespace-nowrap text-base font-semibold text-gray-900">
                 {market.volume24h}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <td className="px-6 py-4 whitespace-nowrap text-base font-semibold text-gray-900">
                 {market.tvl}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
+              <td className="px-6 py-4 whitespace-nowrap text-base font-bold text-gray-900">
                 {market.steptionsTvl}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center justify-between">
                   {formatReturns(market.depositReturns)}
-                  <button className="ml-4 px-4 py-2 bg-blue-600 text-white text-xs font-medium rounded-md hover:bg-blue-700 transition-colors">
+                  <button className="ml-4 px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-md hover:bg-blue-700 transition-colors shadow-sm">
                     Deposit
                   </button>
                 </div>

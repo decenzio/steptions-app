@@ -177,53 +177,48 @@ export default function PortfolioSection() {
   }
 
   const getExpiryColor = (days: number): string => {
-    if (days <= 3) return 'text-red-600 bg-red-50'
-    if (days <= 7) return 'text-yellow-600 bg-yellow-50'
-    return 'text-green-600 bg-green-50'
+    if (days <= 3) return 'text-red-700 bg-red-100 border-red-200'
+    if (days <= 7) return 'text-orange-700 bg-orange-100 border-orange-200'
+    return 'text-green-700 bg-green-100 border-green-200'
   }
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl border border-gray-300 p-6 shadow-sm">
       {/* Header */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-xl font-bold text-gray-800">Your Portfolio</h3>
-          <div className="text-sm text-gray-500">
-            Last updated: {new Date().toLocaleString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          })}
+          <h3 className="text-xl font-bold text-gray-900">Your Portfolio</h3>
+          <div className="text-sm font-medium text-gray-700">
+            Last updated: 2025-06-21 15:31:54
           </div>
         </div>
 
         {/* Portfolio Overview Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4">
-            <div className="text-sm text-blue-600 font-medium">Total Balance</div>
-            <div className="text-2xl font-bold text-blue-800">{formatCurrency(portfolioStats.totalBalance)}</div>
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
+            <div className="text-sm text-blue-700 font-bold">Total Balance</div>
+            <div className="text-2xl font-bold text-blue-900">{formatCurrency(portfolioStats.totalBalance)}</div>
           </div>
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
-            <div className="text-sm text-green-600 font-medium">Total P&L</div>
-            <div className="text-2xl font-bold text-green-800">
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
+            <div className="text-sm text-green-700 font-bold">Total P&L</div>
+            <div className="text-2xl font-bold text-green-900">
               {formatCurrency(portfolioStats.totalPnl)}
             </div>
-            <div className="text-sm text-green-600">{formatPercentage(portfolioStats.totalPnlPercentage)}</div>
+            <div className="text-sm font-bold text-green-700">{formatPercentage(portfolioStats.totalPnlPercentage)}</div>
           </div>
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4">
-            <div className="text-sm text-purple-600 font-medium">Available Cash</div>
-            <div className="text-2xl font-bold text-purple-800">{formatCurrency(portfolioStats.availableCash)}</div>
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200">
+            <div className="text-sm text-purple-700 font-bold">Available Cash</div>
+            <div className="text-2xl font-bold text-purple-900">{formatCurrency(portfolioStats.availableCash)}</div>
           </div>
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4">
-            <div className="text-sm text-orange-600 font-medium">Assets Value</div>
-            <div className="text-2xl font-bold text-orange-800">{formatCurrency(portfolioStats.assetsValue)}</div>
+          <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200">
+            <div className="text-sm text-orange-700 font-bold">Assets Value</div>
+            <div className="text-2xl font-bold text-orange-900">{formatCurrency(portfolioStats.assetsValue)}</div>
           </div>
         </div>
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1">
+      <div className="flex space-x-1 mb-6 bg-gray-100 rounded-lg p-1 border border-gray-300">
         {[
           { key: 'overview', label: 'Overview' },
           { key: 'assets', label: 'Assets' },
@@ -233,10 +228,10 @@ export default function PortfolioSection() {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key as any)}
-            className={`flex-1 py-2 px-4 rounded-md font-medium transition-colors ${
+            className={`flex-1 py-2 px-4 rounded-md font-bold transition-colors ${
               activeTab === tab.key
-                ? 'bg-white text-blue-600 shadow-sm'
-                : 'text-gray-600 hover:text-gray-800'
+                ? 'bg-white text-blue-700 shadow-sm border border-blue-200'
+                : 'text-gray-700 hover:text-gray-900'
             }`}
           >
             {tab.label}
@@ -252,65 +247,65 @@ export default function PortfolioSection() {
             {/* Allocation Chart */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-semibold text-gray-800 mb-4">Portfolio Allocation</h4>
-                <div className="space-y-3">
+                <h4 className="font-bold text-gray-900 mb-4">Portfolio Allocation</h4>
+                <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Assets</span>
-                    <span className="font-medium">{formatCurrency(portfolioStats.assetsValue)}</span>
+                    <span className="text-sm font-semibold text-gray-700">Assets</span>
+                    <span className="font-bold text-gray-900">{formatCurrency(portfolioStats.assetsValue)}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-blue-600 h-2 rounded-full" style={{ width: '37.3%' }}></div>
+                  <div className="w-full bg-gray-300 rounded-full h-3 border border-gray-400">
+                    <div className="bg-blue-600 h-3 rounded-full" style={{ width: '37.3%' }}></div>
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Liquidity Pools</span>
-                    <span className="font-medium">{formatCurrency(portfolioStats.liquidityValue)}</span>
+                    <span className="text-sm font-semibold text-gray-700">Liquidity Pools</span>
+                    <span className="font-bold text-gray-900">{formatCurrency(portfolioStats.liquidityValue)}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-600 h-2 rounded-full" style={{ width: '27.8%' }}></div>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Options</span>
-                    <span className="font-medium">{formatCurrency(portfolioStats.optionsValue)}</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-orange-600 h-2 rounded-full" style={{ width: '14.6%' }}></div>
+                  <div className="w-full bg-gray-300 rounded-full h-3 border border-gray-400">
+                    <div className="bg-green-600 h-3 rounded-full" style={{ width: '27.8%' }}></div>
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Cash</span>
-                    <span className="font-medium">{formatCurrency(portfolioStats.availableCash)}</span>
+                    <span className="text-sm font-semibold text-gray-700">Options</span>
+                    <span className="font-bold text-gray-900">{formatCurrency(portfolioStats.optionsValue)}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-purple-600 h-2 rounded-full" style={{ width: '20.3%' }}></div>
+                  <div className="w-full bg-gray-300 rounded-full h-3 border border-gray-400">
+                    <div className="bg-orange-600 h-3 rounded-full" style={{ width: '14.6%' }}></div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-gray-700">Cash</span>
+                    <span className="font-bold text-gray-900">{formatCurrency(portfolioStats.availableCash)}</span>
+                  </div>
+                  <div className="w-full bg-gray-300 rounded-full h-3 border border-gray-400">
+                    <div className="bg-purple-600 h-3 rounded-full" style={{ width: '20.3%' }}></div>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h4 className="font-semibold text-gray-800 mb-4">Recent Activity</h4>
+                <h4 className="font-bold text-gray-900 mb-4">Recent Activity</h4>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg border border-gray-300">
                     <div>
-                      <div className="text-sm font-medium">BTC Call Exercised</div>
-                      <div className="text-xs text-gray-500">2 hours ago</div>
+                      <div className="text-sm font-bold text-gray-900">BTC Call Exercised</div>
+                      <div className="text-sm font-medium text-gray-700">2 hours ago</div>
                     </div>
-                    <div className="text-green-600 font-medium">+$3,847.32</div>
+                    <div className="text-green-700 font-bold">+$3,847.32</div>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg border border-gray-300">
                     <div>
-                      <div className="text-sm font-medium">ETH Liquidity Added</div>
-                      <div className="text-xs text-gray-500">1 day ago</div>
+                      <div className="text-sm font-bold text-gray-900">ETH Liquidity Added</div>
+                      <div className="text-sm font-medium text-gray-700">1 day ago</div>
                     </div>
-                    <div className="text-blue-600 font-medium">$20,000.00</div>
+                    <div className="text-blue-700 font-bold">$20,000.00</div>
                   </div>
-                  <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div className="flex items-center justify-between p-3 bg-gray-100 rounded-lg border border-gray-300">
                     <div>
-                      <div className="text-sm font-medium">CHEF Put Purchased</div>
-                      <div className="text-xs text-gray-500">3 days ago</div>
+                      <div className="text-sm font-bold text-gray-900">CHEF Put Purchased</div>
+                      <div className="text-sm font-medium text-gray-700">3 days ago</div>
                     </div>
-                    <div className="text-orange-600 font-medium">-$150.00</div>
+                    <div className="text-orange-700 font-bold">-$150.00</div>
                   </div>
                 </div>
               </div>
@@ -322,28 +317,28 @@ export default function PortfolioSection() {
         {activeTab === 'assets' && (
           <div className="space-y-4">
             {portfolioAssets.map((asset) => (
-              <div key={asset.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={asset.id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg border border-gray-300">
                 <div className="flex items-center space-x-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={asset.imageUrl}
                     alt={asset.symbol}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
+                    width={48}
+                    height={48}
+                    className="rounded-full border-2 border-gray-400"
                   />
                   <div>
-                    <div className="font-semibold">{asset.symbol}</div>
-                    <div className="text-sm text-gray-500">{asset.name}</div>
-                    <div className="text-xs text-gray-400">{asset.quantity.toFixed(6)} {asset.symbol}</div>
+                    <div className="font-bold text-gray-900 text-lg">{asset.symbol}</div>
+                    <div className="text-sm font-semibold text-gray-700">{asset.name}</div>
+                    <div className="text-sm font-medium text-gray-600">{asset.quantity.toFixed(6)} {asset.symbol}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-semibold">{formatCurrency(asset.totalValue)}</div>
-                  <div className={`text-sm ${asset.pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <div className="font-bold text-gray-900 text-lg">{formatCurrency(asset.totalValue)}</div>
+                  <div className={`text-base font-bold ${asset.pnl >= 0 ? 'text-green-700' : 'text-red-700'}`}>
                     {formatCurrency(asset.pnl)} ({formatPercentage(asset.pnlPercentage)})
                   </div>
-                  <div className="text-xs text-gray-500">Avg: {formatCurrency(asset.averagePrice)}</div>
+                  <div className="text-sm font-medium text-gray-600">Avg: {formatCurrency(asset.averagePrice)}</div>
                 </div>
               </div>
             ))}
@@ -354,39 +349,39 @@ export default function PortfolioSection() {
         {activeTab === 'options' && (
           <div className="space-y-4">
             {optionPositions.map((option) => (
-              <div key={option.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={option.id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg border border-gray-300">
                 <div className="flex items-center space-x-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={option.imageUrl}
                     alt={option.asset}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
+                    width={48}
+                    height={48}
+                    className="rounded-full border-2 border-gray-400"
                   />
                   <div>
                     <div className="flex items-center space-x-2">
-                      <span className="font-semibold">{option.asset}</span>
-                      <span className={`px-2 py-1 text-xs rounded ${
+                      <span className="font-bold text-gray-900 text-lg">{option.asset}</span>
+                      <span className={`px-3 py-1 text-sm font-bold rounded border-2 ${
                         option.type === 'call'
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-red-100 text-red-700'
+                          ? 'bg-green-100 text-green-800 border-green-300'
+                          : 'bg-red-100 text-red-800 border-red-300'
                       }`}>
                         {option.type.toUpperCase()}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm font-semibold text-gray-700">
                       Strike: {formatCurrency(option.strikePrice)} • Qty: {option.quantity}
                     </div>
-                    <div className="text-xs text-gray-400">Exp: {option.expirationDate}</div>
+                    <div className="text-sm font-medium text-gray-600">Exp: {option.expirationDate}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-semibold">{formatCurrency(option.currentValue)}</div>
-                  <div className={`text-sm ${option.pnl >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                  <div className="font-bold text-gray-900 text-lg">{formatCurrency(option.currentValue)}</div>
+                  <div className={`text-base font-bold ${option.pnl >= 0 ? 'text-green-700' : 'text-red-700'}`}>
                     {formatCurrency(option.pnl)}
                   </div>
-                  <div className={`text-xs px-2 py-1 rounded ${getExpiryColor(option.daysToExpiry)}`}>
+                  <div className={`text-sm font-bold px-2 py-1 rounded border ${getExpiryColor(option.daysToExpiry)}`}>
                     {option.daysToExpiry}d to expiry
                   </div>
                 </div>
@@ -399,28 +394,28 @@ export default function PortfolioSection() {
         {activeTab === 'liquidity' && (
           <div className="space-y-4">
             {liquidityPositions.map((position) => (
-              <div key={position.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+              <div key={position.id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg border border-gray-300">
                 <div className="flex items-center space-x-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={position.imageUrl}
                     alt={position.asset}
-                    width={40}
-                    height={40}
-                    className="rounded-full"
+                    width={48}
+                    height={48}
+                    className="rounded-full border-2 border-gray-400"
                   />
                   <div>
-                    <div className="font-semibold">{position.asset} Liquidity Pool</div>
-                    <div className="text-sm text-gray-500">APY: {position.apy}%</div>
-                    <div className="text-xs text-gray-400">Lockup ends: {position.lockupEnd}</div>
+                    <div className="font-bold text-gray-900 text-lg">{position.asset} Liquidity Pool</div>
+                    <div className="text-sm font-semibold text-gray-700">APY: {position.apy}%</div>
+                    <div className="text-sm font-medium text-gray-600">Lockup ends: {position.lockupEnd}</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="font-semibold">{formatCurrency(position.poolAmount)}</div>
-                  <div className="text-sm text-green-600">
+                  <div className="font-bold text-gray-900 text-lg">{formatCurrency(position.poolAmount)}</div>
+                  <div className="text-base font-bold text-green-700">
                     Earned: {formatCurrency(position.earnedRewards)}
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-sm font-medium text-gray-600">
                     {position.daysRemaining} days remaining
                   </div>
                 </div>

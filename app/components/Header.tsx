@@ -1,21 +1,21 @@
+import Logo from './Logo'
+
 export default function Header() {
   return (
-    <header className="header">
+    <header className="header border-b border-gray-300 bg-white shadow-sm">
       <div className="container mx-auto px-4 py-6 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 flex items-center justify-center relative">
-            <div className="w-6 h-6 logo-icon"></div>
-          </div>
-          <span className="text-2xl font-bold text-gray-800">STEPTIONS</span>
+          <Logo />
+          <span className="text-2xl font-bold text-white">STEPTIONS</span>
         </div>
 
         {/* Navigation Buttons */}
         <div className="flex space-x-4">
-          <button className="btn-secondary px-8 py-3">
+          <button className="btn-secondary px-8 py-3 font-bold">
             LOGIN
           </button>
-          <button className="btn-primary px-8 py-3">
+          <button className="btn-primary px-8 py-3 font-bold">
             REGISTER
           </button>
         </div>
