@@ -1,7 +1,9 @@
 import DashboardCard from './DashboardCard'
 import MarketsTable from './MarketsTable'
 import TradeSection from './TradeSection'
+import OptionsExercisingSection from './OptionsExercisingSection'
 import LiquiditySection from './LiquiditySection'
+import PortfolioSection from './PortfolioSection'
 
 export default function DashboardGrid() {
   return (
@@ -13,17 +15,26 @@ export default function DashboardGrid() {
         </div>
       </div>
 
-      {/* Trade and Provide Liquidity - Side by side */}
+      {/* Trade and Exercise Options - Side by side */}
       <div className="dashboard-card p-0 h-auto">
         <TradeSection />
       </div>
       <div className="dashboard-card p-0 h-auto">
-        <LiquiditySection />
+        <OptionsExercisingSection />
+      </div>
+
+      {/* Provide Liquidity - Full width */}
+      <div className="md:col-span-2">
+        <div className="dashboard-card p-0 h-auto">
+          <LiquiditySection />
+        </div>
       </div>
 
       {/* Your Portfolio - Full width on bottom */}
       <div className="md:col-span-2">
-        <DashboardCard title="YOUR PORTFOLIO" className="h-48" />
+        <div className="dashboard-card p-0 h-auto">
+          <PortfolioSection />
+        </div>
       </div>
     </div>
   )
