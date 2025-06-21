@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
 :root {
+  /* Base colors */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1a1a1a;
+
+  /* Orange palette */
+  --orange-50: #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-200: #fed7aa;
+  --orange-300: #fdba74;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --orange-900: #7c2d12;
+
+  /* Blue palette */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-200: #bfdbfe;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --blue-800: #1e40af;
+  --blue-900: #1e3a8a;
+
+  /* Accent colors */
+  --primary: var(--blue-600);
+  --secondary: var(--orange-500);
+  --accent: var(--orange-400);
+  --neutral: #f1f5f9;
+  --border: var(--blue-200);
 }
 
 @theme inline {
@@ -10,17 +42,172 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Custom color extensions */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-neutral: var(--neutral);
+  --color-border: var(--border);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --neutral: #1e293b;
+    --border: var(--blue-800);
+    --primary: var(--blue-400);
+    --secondary: var(--orange-400);
+    --accent: var(--orange-300);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Use Geist Mono for code elements */
+code, pre {
+  font-family: var(--font-geist-mono), 'Courier New', monospace;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* Button styling with orange/blue theme */
+button {
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Primary button (blue) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue-600), var(--blue-700));
+  color: white;
+  border: 2px solid var(--blue-600);
+  box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--blue-700), var(--blue-800));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.35);
+}
+
+/* Secondary button (orange outline) */
+.btn-secondary {
+  background: transparent;
+  color: var(--orange-600);
+  border: 2px solid var(--orange-500);
+}
+
+.btn-secondary:hover {
+  background: var(--orange-500);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px 0 rgba(249, 115, 22, 0.25);
+}
+
+/* Card styling with gradient borders */
+.dashboard-card {
+  background: linear-gradient(135deg, var(--neutral), #ffffff);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--blue-400), var(--orange-400));
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Header styling */
+.header {
+  background: linear-gradient(135deg, #ffffff, var(--blue-50));
+  border-bottom: 2px solid var(--border);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
+}
+
+/* Logo styling */
+.logo-icon {
+  background: linear-gradient(135deg, var(--blue-600), var(--orange-500));
+  border-radius: 0.5rem;
+  transform: rotate(45deg);
+}
+
+/* Welcome text gradient */
+.welcome-text {
+  background: linear-gradient(135deg, var(--blue-700), var(--orange-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* Card titles */
+.card-title {
+  color: var(--blue-800);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Grid layout responsive adjustments */
+@media (max-width: 768px) {
+  .grid {
+    gap: 1rem;
+  }
+
+  .dashboard-card {
+    border-radius: 0.75rem;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .dashboard-card {
+    background: linear-gradient(135deg, var(--neutral), #1e293b);
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--background), #1e293b);
+  }
+
+  .card-title {
+    color: var(--blue-300);
+  }
+
+  .welcome-text {
+    background: linear-gradient(135deg, var(--blue-400), var(--orange-400));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
