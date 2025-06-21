@@ -8,7 +8,7 @@ export const account = new PasskeyKit({
     timeoutInSeconds: 30,
 })
 
-// Keep server for potential future use, but not required for basic auth
+// Keep server for potential future use,but not required for basic auth
 export const server = new PasskeyServer({
     rpcUrl: process.env.NEXT_PUBLIC_RPC_URL!,
     launchtubeUrl: process.env.NEXT_PUBLIC_LAUNCHTUBE_URL!,
