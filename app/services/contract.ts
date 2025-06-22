@@ -1,5 +1,5 @@
 import { account, server } from "./passkeys";
-import { Client as SteptionsClient } from "../../stellar-hack-Pera-2025/bindings/src";
+import { Client as SteptionsClient, type OptionType, type OptionData, type PoolData } from "../../stellar-hack-Pera-2025/bindings/src";
 import type { u64, i128 } from '@stellar/stellar-sdk/contract';
 
 // Initialize the contract client - you'll need to set these environment variables
@@ -12,6 +12,23 @@ const steptionsClient = new SteptionsClient({
 export interface LiquidityResult {
     success: boolean;
     lpShares?: string;
+    transactionHash?: string;
+    error?: string;
+}
+
+export interface OptionResult {
+    success: boolean;
+    optionId?: string;
+    payout?: string;
+    transactionHash?: string;
+    error?: string;
+}
+
+export interface PoolResult {
+    success: boolean;
+    pool?: PoolData;
+    pools?: u64[];
+    poolId?: string;
     transactionHash?: string;
     error?: string;
 }
@@ -126,7 +143,7 @@ export async function buyOption(
     expiry: u64,
     amount: string,
     keyId: string
-) {
+): Promise<OptionResult> {
     try {
         console.log(`Buying option: pool=${poolId}, type=${optType}, strike=${strike}`);
 
@@ -134,7 +151,7 @@ export async function buyOption(
             await account.connectWallet({ keyId });
         }
 
-        const optionType = { tag: optType, values: undefined } as any;
+        const optionType = { tag: optType, values: undefined } as OptionType;
         const strikePrice = BigInt(strike) as i128;
         const optionAmount = BigInt(amount) as i128;
 
@@ -166,9 +183,163 @@ export async function buyOption(
 }
 
 /**
+ * Exercise an option (American-style)
+ */
+export async function exerciseOption(
+    optionId: u64,
+    keyId: string
+): Promise<OptionResult> {
+    try {
+        console.log(`Exercising option: ${optionId}`);
+
+        if (!account.wallet?.options) {
+            await account.connectWallet({ keyId });
+        }
+
+        const assembledTx = await steptionsClient.exercise_option({
+            option_id: optionId
+        });
+
+        const signedTx = await account.sign(assembledTx.built!, { keyId });
+        const result = await server.send(signedTx);
+
+        const payout = assembledTx.result?.toString() || "0";
+
+        return {
+            success: true,
+            payout,
+            transactionHash: result.hash
+        };
+
+    } catch (error: unknown) {
+        console.error('Error exercising option:', error);
+        return {
+            success: false,
+            error: `Failed to exercise option: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Expire an option (release collateral)
+ */
+export async function expireOption(
+    optionId: u64,
+    keyId: string
+): Promise<OptionResult> {
+    try {
+        console.log(`Expiring option: ${optionId}`);
+
+        if (!account.wallet?.options) {
+            await account.connectWallet({ keyId });
+        }
+
+        const assembledTx = await steptionsClient.expire_option({
+            option_id: optionId
+        });
+
+        const signedTx = await account.sign(assembledTx.built!, { keyId });
+        const result = await server.send(signedTx);
+
+        return {
+            success: true,
+            transactionHash: result.hash
+        };
+
+    } catch (error: unknown) {
+        console.error('Error expiring option:', error);
+        return {
+            success: false,
+            error: `Failed to expire option: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Admin function to add a new liquidity pool
+ */
+export async function addLiquidityPool(
+    stableToken: string,
+    underlyingAsset: string,
+    priceFeed: string,
+    name: string,
+    keyId: string
+): Promise<PoolResult> {
+    try {
+        console.log(`Adding pool: ${name} (${stableToken}/${underlyingAsset})`);
+
+        if (!account.wallet?.options) {
+            await account.connectWallet({ keyId });
+        }
+
+        const assembledTx = await steptionsClient.add_liquidity_pool({
+            stable_token: stableToken,
+            underlying_asset: underlyingAsset,
+            price_feed: priceFeed,
+            name: name
+        });
+
+        const signedTx = await account.sign(assembledTx.built!, { keyId });
+        const result = await server.send(signedTx);
+
+        return {
+            success: true,
+            poolId: assembledTx.result?.toString(),
+            transactionHash: result.hash
+        };
+
+    } catch (error: unknown) {
+        console.error('Error adding pool:', error);
+        return {
+            success: false,
+            error: `Failed to add pool: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Admin function to set pool status
+ */
+export async function setPoolStatus(
+    poolId: u64,
+    isActive: boolean,
+    keyId: string
+): Promise<PoolResult> {
+    try {
+        console.log(`Setting pool ${poolId} status to ${isActive ? 'active' : 'inactive'}`);
+
+        if (!account.wallet?.options) {
+            await account.connectWallet({ keyId });
+        }
+
+        const assembledTx = await steptionsClient.set_pool_status({
+            pool_id: poolId,
+            is_active: isActive
+        });
+
+        const signedTx = await account.sign(assembledTx.built!, { keyId });
+        const result = await server.send(signedTx);
+
+        return {
+            success: true,
+            transactionHash: result.hash
+        };
+
+    } catch (error: unknown) {
+        console.error('Error setting pool status:', error);
+        return {
+            success: false,
+            error: `Failed to set pool status: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+// === READ-ONLY FUNCTIONS (No signing required) ===
+
+/**
  * Get pool information
  */
-export async function getPoolInfo(poolId: u64) {
+export async function getPoolInfo(poolId: u64): Promise<PoolResult> {
     try {
         const result = await steptionsClient.get_pool({ pool_id: poolId });
         return {
@@ -180,6 +351,25 @@ export async function getPoolInfo(poolId: u64) {
         return {
             success: false,
             error: `Failed to get pool info: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get all pools
+ */
+export async function getAllPools(): Promise<PoolResult> {
+    try {
+        const result = await steptionsClient.get_all_pools();
+        return {
+            success: true,
+            pools: result.result
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching all pools:', error);
+        return {
+            success: false,
+            error: `Failed to get all pools: ${JSON.stringify(error)}`
         };
     }
 }
@@ -202,6 +392,63 @@ export async function getUserLpShares(poolId: u64, provider: string) {
         return {
             success: false,
             error: `Failed to get LP shares: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get pool total liquidity
+ */
+export async function getPoolTotalLiquidity(poolId: u64) {
+    try {
+        const result = await steptionsClient.get_pool_total_liquidity({ pool_id: poolId });
+        return {
+            success: true,
+            liquidity: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching pool liquidity:', error);
+        return {
+            success: false,
+            error: `Failed to get pool liquidity: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get option data
+ */
+export async function getOptionData(optionId: u64) {
+    try {
+        const result = await steptionsClient.get_option({ option_id: optionId });
+        return {
+            success: true,
+            option: result.result
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching option data:', error);
+        return {
+            success: false,
+            error: `Failed to get option data: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get current price from price feed
+ */
+export async function getPriceFromFeed(priceFeed: string) {
+    try {
+        const result = await steptionsClient.get_price_from_feed({ price_feed: priceFeed });
+        return {
+            success: true,
+            price: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching price:', error);
+        return {
+            success: false,
+            error: `Failed to get price: ${JSON.stringify(error)}`
         };
     }
 }
