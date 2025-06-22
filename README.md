@@ -35,8 +35,8 @@ Here's a comprehensive overview:
 
 ## 🏗️ **Project Structure**
 - **Landing Page** (`app/page.tsx`): Marketing site with FAQs, team info, and educational content
-- **App Dashboard** (`app/app/page.tsx`): Main trading interface with welcome section and dashboard grid
-- **Component-based Architecture**: Modular React components for scalability
+- **App Dashboard** (`app/app/page.tsx`): Main trading interface, everything app related
+- **Smart contract**: [gitsubmodule](https://github.com/f1l1ph/stellar-hack-Pera-2025)
 
 ## 🏗️ **Solution Architecture**
 ![steptions-arch](https://github.com/user-attachments/assets/1d4bdfb3-43a2-4ca6-9055-65cd150a3848)
