@@ -259,7 +259,7 @@ export default function LandingPage() {
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className="w-full text-base py-3 px-4 rounded-lg"
+                className="w-full text-base px-4 rounded-lg bg-white focus:outline-none"
               />
               <Button size="lg" className="w-full text-base py-3">
                 Subscribe to Newsletter
