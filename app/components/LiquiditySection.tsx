@@ -211,7 +211,7 @@ export default function LiquiditySection() {
   return (
     <div className="bg-white rounded-xl border border-gray-300 p-6 h-full shadow-sm">
       <div className="flex flex-col h-full">
-        {/* Header */}
+        {/* HeaderApp */}
         <div className="mb-6">
           <h3 className="text-xl font-bold text-gray-900 mb-2">Provide Liquidity</h3>
           <p className="text-sm font-medium text-gray-700">Earn rewards by providing liquidity to options markets</p>

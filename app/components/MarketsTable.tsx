@@ -130,7 +130,7 @@ export default function MarketsTable() {
 
   return (
     <div className="bg-white rounded-xl border border-gray-300 overflow-hidden shadow-sm">
-      {/* Header */}
+      {/* HeaderApp */}
       <div className="bg-gray-100 px-6 py-4 border-b border-gray-300">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold text-gray-900">Markets</h3>

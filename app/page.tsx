@@ -1,21 +1,52 @@
 'use client'
 
+import { useState } from 'react'
 import Link from "next/link";
+import Header from "@/app/components/Header";
 
 export default function LandingPage() {
+  const [openFAQ, setOpenFAQ] = useState<number | null>(null)
+
+  const toggleFAQ = (index: number) => {
+    setOpenFAQ(openFAQ === index ? null : index)
+  }
+
+  const faqs = [
+    {
+      question: "What is STEPTIONS?",
+      answer: "STEPTIONS is a decentralized options trading platform offering advanced features for trading, liquidity provision, and portfolio management."
+    },
+    {
+      question: "How do I earn rewards?",
+      answer: "You can earn rewards by providing liquidity to options markets. Rewards are based on the APY and lockup period of the liquidity pools."
+    },
+    {
+      question: "What assets are supported?",
+      answer: "STEPTIONS supports leading cryptocurrencies such as Bitcoin, Ethereum, and more."
+    },
+    {
+      question: "Is STEPTIONS secure?",
+      answer: "Yes, STEPTIONS uses advanced security protocols and smart contract audits to ensure the safety of your funds and trading activities."
+    },
+    {
+      question: "How do I get started?",
+      answer: "Simply click 'Open App' in the header, connect your wallet, and start trading options or providing liquidity to earn rewards."
+    }
+  ]
+
   return (
     <div className="bg-white text-gray-900 font-sans">
+      <Header />
       {/* Hero Section */}
       <section className="text-center py-20 bg-gradient-to-br from-blue-600 to-orange-500 text-white">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Welcome to STEPTIONS</h1>
         <p className="text-lg md:text-xl font-medium max-w-3xl mx-auto mb-8">
           Revolutionizing options trading with advanced liquidity solutions and professional portfolio management.
         </p>
-        <Link href="/app">
-          <button className="btn-primary px-8 py-4 font-bold text-lg rounded-lg bg-white text-blue-600 hover:bg-gray-200 transition-all shadow-lg">
-            Open App
-          </button>
-        </Link>
+        <div className="space-y-4">
+          <p className="text-xl font-bold">Ready to start trading options?</p>
+          <p className="text-lg">Join thousands of traders already using STEPTIONS for professional options trading.</p>
+        </div>
       </section>
 
       {/* About Section */}
@@ -26,7 +57,7 @@ export default function LandingPage() {
             STEPTIONS is a decentralized options trading platform designed for traders of all levels. We offer seamless trading, reward-driven liquidity pools, and powerful portfolio tools to help you manage your investments professionally.
           </p>
           <img
-            src="https://source.unsplash.com/800x400/?finance,trading"
+            src="/examples.png"
             alt="Trading illustration"
             className="rounded-lg shadow-md mx-auto"
           />
@@ -41,8 +72,8 @@ export default function LandingPage() {
             Options are financial instruments that give you the right to buy or sell an asset at a predetermined price before a specific date. With STEPTIONS, trade call and put options on leading cryptocurrencies and maximize your trading potential.
           </p>
           <img
-            src="https://source.unsplash.com/800x400/?cryptocurrency,finance"
-            alt="Options illustration"
+            src="/how-option.png"
+            alt="Trading illustration"
             className="rounded-lg shadow-md mx-auto"
           />
         </div>
@@ -71,21 +102,39 @@ export default function LandingPage() {
 
       {/* FAQ Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-extrabold mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">What is STEPTIONS?</h3>
-              <p className="text-gray-700">STEPTIONS is a decentralized options trading platform offering advanced features for trading, liquidity provision, and portfolio management.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">How do I earn rewards?</h3>
-              <p className="text-gray-700">You can earn rewards by providing liquidity to options markets. Rewards are based on the APY and lockup period of the liquidity pools.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-4">What assets are supported?</h3>
-              <p className="text-gray-700">STEPTIONS supports leading cryptocurrencies such as Bitcoin, Ethereum, and more.</p>
-            </div>
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-4xl font-extrabold mb-6 text-center">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <button
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <h3 className="text-lg font-bold text-gray-900">{faq.question}</h3>
+                  <svg
+                    className={`w-5 h-5 transform transition-transform ${
+                      openFAQ === index ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {openFAQ === index && (
+                  <div className="px-6 pb-4">
+                    <p className="text-gray-700">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -98,30 +147,30 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
               <img
-                src="https://source.unsplash.com/150x150/?person,ceo"
-                alt="Alice Johnson"
+                src="/team/romi.jpg"
+                alt="Romi"
                 className="rounded-full mx-auto mb-4"
               />
-              <h3 className="text-xl font-bold mb-2">Alice Johnson</h3>
-              <p className="text-gray-700">CEO & Blockchain Visionary</p>
+              <h3 className="text-xl font-bold mb-2">Romi</h3>
+              <p className="text-gray-700">Web3 Specialist</p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
               <img
-                src="https://source.unsplash.com/150x150/?person,developer"
-                alt="Bob Smith"
+                src="/team/murphy.jpeg"
+                alt="Murphy"
                 className="rounded-full mx-auto mb-4"
               />
-              <h3 className="text-xl font-bold mb-2">Bob Smith</h3>
-              <p className="text-gray-700">Lead Developer</p>
+              <h3 className="text-xl font-bold mb-2">Murphy</h3>
+              <p className="text-gray-700">Fronted Developer</p>
             </div>
             <div className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-all">
               <img
-                src="https://source.unsplash.com/150x150/?person,trader"
-                alt="Charlie Brown"
+                src="/team/filip.jpeg"
+                alt="Filip"
                 className="rounded-full mx-auto mb-4"
               />
-              <h3 className="text-xl font-bold mb-2">Charlie Brown</h3>
-              <p className="text-gray-700">Options Trading Expert</p>
+              <h3 className="text-xl font-bold mb-2">Filip</h3>
+              <p className="text-gray-700">Smart Contract Developer</p>
             </div>
           </div>
         </div>

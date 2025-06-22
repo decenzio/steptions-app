@@ -184,7 +184,7 @@ export default function PortfolioSection() {
 
   return (
     <div className="bg-white rounded-xl border border-gray-300 p-6 shadow-sm">
-      {/* Header */}
+      {/* HeaderApp */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-bold text-gray-900">Your Portfolio</h3>
