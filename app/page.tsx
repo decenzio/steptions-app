@@ -41,7 +41,7 @@ export default function LandingPage() {
       <section className="text-center py-20 bg-gradient-to-br from-blue-600 to-orange-500 text-white">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Welcome to STEPTIONS</h1>
         <p className="text-lg md:text-xl font-medium max-w-3xl mx-auto mb-8">
-          Revolutionizing options trading with advanced liquidity solutions and professional portfolio management.
+          The First Options Protocol on Stellar. Insure any asset. Hedge price risk. Earn yield.
         </p>
       </section>
 
@@ -50,8 +50,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold mb-6">About STEPTIONS</h2>
           <p className="text-lg text-gray-700 mb-8">
-            STEPTIONS is a decentralized options trading platform designed for traders of all levels. We offer seamless trading, reward-driven liquidity pools, and powerful portfolio tools to help you manage your investments professionally.
-          </p>
+            STEPTIONS, a decentralized options platform built for beginners and pros alike. Enjoy smooth trading, earn from liquidity pools, and manage your portfolio with confidence.          </p>
           <img
             src="/examples.png"
             alt="Trading illustration"
@@ -65,7 +64,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold mb-6">What Are Options?</h2>
           <p className="text-lg text-gray-700 mb-8">
-            Options are financial instruments that give you the right to buy or sell an asset at a predetermined price before a specific date. With STEPTIONS, trade call and put options on leading cryptocurrencies and maximize your trading potential.
+            Options are financial instruments that give you the right to buy or sell an asset at a predetermined price before a specific date. With STEPTIONS, trade call and put options on leading assets.
           </p>
           <img
             src="/how-option.png"

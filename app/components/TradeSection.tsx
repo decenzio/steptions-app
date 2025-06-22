@@ -255,7 +255,6 @@ export default function TradeSection() {
               }`}
             >
               CALL
-              <div className="text-xs mt-1 font-medium">Bullish</div>
             </button>
             <button
               onClick={() => setOptionType('put')}
@@ -266,7 +265,6 @@ export default function TradeSection() {
               }`}
             >
               PUT
-              <div className="text-xs mt-1 font-medium">Bearish</div>
             </button>
           </div>
         </div>
