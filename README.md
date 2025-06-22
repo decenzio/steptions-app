@@ -36,6 +36,9 @@
 - **App Dashboard** (`app/app/page.tsx`): Main trading interface with welcome section and dashboard grid
 - **Component-based Architecture**: Modular React components for scalability
 
+## 🏗️ **Solution Architecture**
+![image](https://github.com/user-attachments/assets/dbd6cb33-7be4-4900-9219-6593849bdf39)
+
 ## 👥 **Team**
 - **Romi**: Web3 Specialist
 - **Murphy**: Frontend Developer
