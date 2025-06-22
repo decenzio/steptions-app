@@ -3,6 +3,9 @@
 The First Options Protocol on Stellar. Insure any asset. Hedge price risk. Earn yield.
 
 Here's a comprehensive overview:
+- [Website](https://steptions-app.vercel.app)
+- [App Demo](https://steptions-app.vercel.app/app)
+- [Pitchdeck](https://drive.proton.me/urls/DQCY37EH6R#rSeh0bS1dIMz)
 
 ## 🚀 **What is STEPTIONS?**
 - **The First Options Protocol on Stellar** - A decentralized platform for trading cryptocurrency options
