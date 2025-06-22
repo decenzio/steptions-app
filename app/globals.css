@@ -49,6 +49,21 @@
   --color-accent: var(--accent);
   --color-neutral: var(--neutral);
   --color-border: var(--border);
+
+  /* Accordion animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  /* Keyframes for accordion */
+  --keyframes-accordion-down: {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  };
+  
+  --keyframes-accordion-up: {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  };
 }
 
 @media (prefers-color-scheme: dark) {
@@ -201,7 +216,7 @@ button:focus {
   }
 
   .card-title {
-    color: var(--blue-300);
+    color: var(--blue-400);
   }
 
   .welcome-text {
@@ -210,4 +225,32 @@ button:focus {
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+}
+
+/* Accordion animations for shadcn/ui */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Accordion content animation classes */
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }
