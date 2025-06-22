@@ -192,28 +192,78 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-extrabold mb-6">Stay Updated</h2>
           <p className="text-lg text-gray-700 mb-8">Subscribe to our newsletter and follow us on social media for the latest updates and news.</p>
-          <div className="space-y-4">
-            <input type="email" placeholder="Enter your email" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            <button className="btn-primary px-8 py-4 font-bold text-lg rounded-lg hover:shadow-lg transition-all">
-              Subscribe
-            </button>
+
+          {/* Newsletter Subscription */}
+          <div className="max-w-md mx-auto mb-12">
+            <div className="space-y-4">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button className="w-full btn-primary px-8 py-4 font-bold text-lg rounded-lg bg-gradient-to-br from-blue-600 to-orange-500 text-white hover:shadow-lg transition-all">
+                Subscribe to Newsletter
+              </button>
+            </div>
           </div>
-          <div className="flex justify-center space-x-6 mt-8">
-            <a href="#" className="text-blue-600 hover:text-blue-800 transition-colors">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22.46 6c-.77.35-1.6.59-2.47.69.89-.53 1.57-1.37 1.89-2.37-.83.49-1.75.85-2.73 1.05A4.92 4.92 0 0016.1 4c-2.73 0-4.94 2.21-4.94 4.92 0 .39.04.77.12 1.13C7.69 9.86 5.1 8.2 3.59 5.91c-.43.74-.67 1.59-.67 2.5 0 1.73.88 3.26 2.22 4.15-.82-.03-1.58-.25-2.26-.63v.06c0 2.42 1.72 4.44 4 4.9-.42.12-.86.18-1.31.18-.32 0-.63-.03-.93-.08.63 1.97 2.45 3.41 4.6 3.45-1.69 1.33-3.81 2.13-6.13 2.13-.4 0-.79-.02-1.18-.07 2.18 1.4 4.76 2.21 7.54 2.21 9.05 0 14-7.5 14-13.99 0-.21 0-.42-.01-.63.95-.69 1.76-1.56 2.41-2.55z" />
-              </svg>
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-800 transition-colors">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.04c5.52 0 10 4.48 10 10 0 5.52-4.48 10-10 10-5.52 0-10-4.48-10-10 0-5.52 4.48-10 10-10zm0 1.92c-.28 0-.56.02-.83.05-.61.07-1.22.21-1.8.41-.58.2-1.14.47-1.67.77-.53.3-1.03.67-1.51 1.13-.48.46-.91.98-1.29 1.54-.38.56-.71 1.17-.98 2.02-.27.64-.47 1.32-.62 2.02-.14.7-.21 1.42-.21 2.15 0 .73.07 1.45.21 2.15.15.7.35 1.38.62 2.02.27.64.6 1.25.98 1.81.38.56.81 1.08 1.29 1.54.48.46.98.83 1.51 1.13.53.3 1.09.57 1.67.77.58.2 1.19.34 1.8.41.27.03.55.05.83.05.76 0 1.52-.13 2.25-.38.73-.25 1.42-.6 2.07-1.06.65-.46 1.26-1.01 1.81-1.64.55-.63 1.03-1.31 1.44-2.03.41-.72.76-1.47 1.06-2.25.3-.78.54-1.58.71-2.4.17-.82.25-1.66.25-2.52 0-.86-.08-1.7-.25-2.52-.17-.82-.41-1.62-.71-2.4-.3-.78-.65-1.53-1.06-2.25-.41-.72-.89-1.4-1.44-2.03-.55-.63-1.16-1.18-1.81-1.64-.65-.46-1.34-.81-2.07-1.06-.73-.25-1.49-.38-2.25-.38zm0 3.65c2.51 0 4.55 2.04 4.55 4.55 0 2.51-2.04 4.55-4.55 4.55-2.51 0-4.55-2.04-4.55-4.55 0-2.51 2.04-4.55 4.55-4.55zm0 1.92c-1.45 0-2.63 1.18-2.63 2.63 0 1.45 1.18 2.63 2.63 2.63 1.45 0 2.63-1.18 2.63-2.63 0-1.45-1.18-2.63-2.63-2.63zm5.55-.94c-.48 0-.87.39-.87.87 0 .48.39.87.87.87.48 0 .87-.39.87-.87 0-.48-.39-.87-.87-.87z" />
-              </svg>
-            </a>
-            <a href="#" className="text-blue-600 hover:text-blue-800 transition-colors">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M7.75 2c1.79 0 3.25 1.46 3.25 3.25S9.54 8.5 7.75 8.5 4.5 7.04 4.5 5.25 5.96 2 7.75 2zm-3.5 8c-.69 0-1.25.56-1.25 1.25v8c0 .69.56 1.25 1.25 1.25h12.5c.69 0 1.25-.56 1.25-1.25v-8c0-.69-.56-1.25-1.25-1.25H4.25zm3.5 0c.69 0 1.25.56 1.25 1.25v8c0 .69-.56 1.25-1.25 1.25H4.25c-.69 0-1.25-.56-1.25-1.25v-8c0-.69.56-1.25 1.25-1.25h3.5z" />
-              </svg>
-            </a>
+
+          {/* Contact & Social Media */}
+          <div className="border-t border-gray-200 pt-8">
+            <h3 className="text-2xl font-bold mb-6">Connect With Us</h3>
+            <div className="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-12">
+
+              {/* Email Contact */}
+              <a
+                href="mailto:hello@steptions.com"
+                className="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all group"
+              >
+                <div className="bg-gray-100 p-3 rounded-full group-hover:bg-gray-200 transition-colors">
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-gray-900">Email Us</div>
+                  <div className="text-sm text-gray-600">hello@steptions.com</div>
+                </div>
+              </a>
+
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/steptions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all group"
+              >
+                <div className="bg-black p-3 rounded-full group-hover:bg-gray-800 transition-colors">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-gray-900">Follow on X</div>
+                  <div className="text-sm text-gray-600">@steptions</div>
+                </div>
+              </a>
+
+              {/* Telegram */}
+              <a
+                href="https://t.me/steptions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all group"
+              >
+                <div className="bg-blue-500 p-3 rounded-full group-hover:bg-blue-600 transition-colors">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                  </svg>
+                </div>
+                <div className="text-left">
+                  <div className="font-semibold text-gray-900">Join Telegram</div>
+                  <div className="text-sm text-gray-600">@steptions</div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
