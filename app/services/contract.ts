@@ -30,6 +30,9 @@ export interface PoolResult {
     pools?: u64[];
     poolId?: string;
     transactionHash?: string;
+    collateral?: string;
+    totalShares?: string;
+    count?: string;
     error?: string;
 }
 
@@ -255,84 +258,7 @@ export async function expireOption(
     }
 }
 
-/**
- * Admin function to add a new liquidity pool
- */
-export async function addLiquidityPool(
-    stableToken: string,
-    underlyingAsset: string,
-    priceFeed: string,
-    name: string,
-    keyId: string
-): Promise<PoolResult> {
-    try {
-        console.log(`Adding pool: ${name} (${stableToken}/${underlyingAsset})`);
 
-        if (!account.wallet?.options) {
-            await account.connectWallet({ keyId });
-        }
-
-        const assembledTx = await steptionsClient.add_liquidity_pool({
-            stable_token: stableToken,
-            underlying_asset: underlyingAsset,
-            price_feed: priceFeed,
-            name: name
-        });
-
-        const signedTx = await account.sign(assembledTx.built!, { keyId });
-        const result = await server.send(signedTx);
-
-        return {
-            success: true,
-            poolId: assembledTx.result?.toString(),
-            transactionHash: result.hash
-        };
-
-    } catch (error: unknown) {
-        console.error('Error adding pool:', error);
-        return {
-            success: false,
-            error: `Failed to add pool: ${JSON.stringify(error)}`
-        };
-    }
-}
-
-/**
- * Admin function to set pool status
- */
-export async function setPoolStatus(
-    poolId: u64,
-    isActive: boolean,
-    keyId: string
-): Promise<PoolResult> {
-    try {
-        console.log(`Setting pool ${poolId} status to ${isActive ? 'active' : 'inactive'}`);
-
-        if (!account.wallet?.options) {
-            await account.connectWallet({ keyId });
-        }
-
-        const assembledTx = await steptionsClient.set_pool_status({
-            pool_id: poolId,
-            is_active: isActive
-        });
-
-        const signedTx = await account.sign(assembledTx.built!, { keyId });
-        const result = await server.send(signedTx);
-
-        return {
-            success: true,
-            transactionHash: result.hash
-        };
-
-    } catch (error: unknown) {
-        console.error('Error setting pool status:', error);
-        return {
-            success: false,
-            error: `Failed to set pool status: ${JSON.stringify(error)}`
-        };
-    }
-}
 
 // === READ-ONLY FUNCTIONS (No signing required) ===
 
@@ -471,3 +397,89 @@ export async function getPoolCounter() {
         };
     }
 }
+
+
+
+/**
+ * Get pool by assets (stable token and underlying asset)
+ */
+export async function getPoolByAssets(
+    stableToken: string,
+    underlyingAsset: string
+): Promise<PoolResult> {
+    try {
+        const result = await steptionsClient.get_pool_by_assets({
+            stable_token: stableToken,
+            underlying_asset: underlyingAsset
+        });
+        return {
+            success: true,
+            poolId: result.result?.toString()
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching pool by assets:', error);
+        return {
+            success: false,
+            error: `Failed to get pool by assets: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get pool locked collateral
+ */
+export async function getPoolLockedCollateral(poolId: u64) {
+    try {
+        const result = await steptionsClient.get_pool_locked_collateral({ pool_id: poolId });
+        return {
+            success: true,
+            collateral: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching pool locked collateral:', error);
+        return {
+            success: false,
+            error: `Failed to get pool locked collateral: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get pool total LP shares
+ */
+export async function getPoolTotalLpShares(poolId: u64) {
+    try {
+        const result = await steptionsClient.get_pool_total_lp_shares({ pool_id: poolId });
+        return {
+            success: true,
+            totalShares: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching pool total LP shares:', error);
+        return {
+            success: false,
+            error: `Failed to get pool total LP shares: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+/**
+ * Get option counter (total number of options)
+ */
+export async function getOptionCounter() {
+    try {
+        const result = await steptionsClient.get_option_counter();
+        return {
+            success: true,
+            count: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching option counter:', error);
+        return {
+            success: false,
+            error: `Failed to get option counter: ${JSON.stringify(error)}`
+        };
+    }
+}
+
+
