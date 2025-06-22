@@ -452,3 +452,22 @@ export async function getPriceFromFeed(priceFeed: string) {
         };
     }
 }
+
+/**
+ * Get pool counter (total number of pools)
+ */
+export async function getPoolCounter() {
+    try {
+        const result = await steptionsClient.get_pool_counter();
+        return {
+            success: true,
+            count: result.result?.toString() || "0"
+        };
+    } catch (error: unknown) {
+        console.error('Error fetching pool counter:', error);
+        return {
+            success: false,
+            error: `Failed to get pool counter: ${JSON.stringify(error)}`
+        };
+    }
+}
