@@ -10,7 +10,7 @@ export default function Header() {
         {/* Logo Section */}
         <div className="flex items-center space-x-3">
           <Logo />
-          <span className="text-2xl font-bold text-gray-900">STEPTIONS</span>
+          <span className="text-2xl font-bold text-white">STEPTIONS</span>
         </div>
 
         {/* User Info & Time */}
