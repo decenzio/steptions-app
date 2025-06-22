@@ -37,7 +37,7 @@
 - **Component-based Architecture**: Modular React components for scalability
 
 ## 🏗️ **Solution Architecture**
-![image](https://github.com/user-attachments/assets/dbd6cb33-7be4-4900-9219-6593849bdf39)
+![steptions-arch](https://github.com/user-attachments/assets/1d4bdfb3-43a2-4ca6-9055-65cd150a3848)
 
 ## 👥 **Team**
 - **Romi**: Web3 Specialist
