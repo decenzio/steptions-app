@@ -1,6 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STEPTIONS - Stellar Options Protocol
 
-## Getting Started
+**STEPTIONS** is a decentralized options trading platform built on the Stellar blockchain. Here's a comprehensive overview:
+
+## 🚀 **What is STEPTIONS?**
+- **The First Options Protocol on Stellar** - A decentralized platform for trading cryptocurrency options
+- **Purpose**: Allow users to insure assets, hedge price risk, and earn yield through options trading
+- **Target Audience**: Both beginners and professional traders
+
+## 🔧 **Technical Stack**
+- **Frontend**: Next.js 15 with React 19
+- **Styling**: Tailwind CSS 4
+- **Blockchain Integration**: Stellar SDK for blockchain interactions
+- **Authentication**: Passkey Kit for secure wallet connections
+- **Language**: TypeScript
+
+## 💡 **Key Features**
+
+1. **Options Trading**
+    - Trade call and put options on leading cryptocurrencies
+    - Support for Bitcoin, Ethereum, and other major assets
+    - Customizable trading parameters
+
+2. **Liquidity Provision**
+    - Earn rewards by providing liquidity to options markets
+    - Flexible lockup periods with APY-based rewards
+    - Multiple liquidity pool options
+
+3. **Portfolio Management**
+    - Track positions and monitor P&L
+    - Professional-grade tools for investment optimization
+    - Real-time portfolio analytics
+
+## 🏗️ **Project Structure**
+- **Landing Page** (`app/page.tsx`): Marketing site with FAQs, team info, and educational content
+- **App Dashboard** (`app/app/page.tsx`): Main trading interface with welcome section and dashboard grid
+- **Component-based Architecture**: Modular React components for scalability
+
+## 👥 **Team**
+- **Romi**: Web3 Specialist
+- **Murphy**: Frontend Developer
+- **Filip**: Smart Contract Developer
+
+## 🔗 **Links & Contact**
+- **Live App**: https://steptions-app.vercel.app
+- **Email**: hello@steptions.com
+- **Social**: @steptions (X/Twitter, Telegram)
+
+## 🛠️ **Development Setup**
+The project uses git submodules and supports multiple package managers (npm, yarn, pnpm, bun) with Turbopack for faster development.
+
+This is essentially a comprehensive DeFi application that brings traditional options trading to the Stellar ecosystem, making it accessible to both retail and institutional users while maintaining the security and efficiency of blockchain technology.
+
+# Getting Started
 
 First, run the development server:
 
