@@ -56,8 +56,8 @@ const mockPositions: OptionPosition[] = [
   },
   {
     id: '3',
-    asset: 'CHEF',
-    imageUrl: 'https://assets.coingecko.com/coins/images/11222/standard/0x_icon.png',
+    asset: 'CHF',
+    imageUrl: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.favpng.com%2F11%2F21%2F11%2Fflag-of-switzerland-logo-coat-of-arms-of-switzerland-png-favpng-qcMfTRzvAeVeEYR2PbTtmB82p.jpg&f=1&nofb=1&ipt=a05c2d501ab85ae3f2ab355ba5e4c7eedec509f385646a71f58e3766c18cab7f',
     type: 'call',
     strikePrice: 3.50,
     currentPrice: 2.89,
