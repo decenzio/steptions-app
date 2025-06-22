@@ -1,6 +1,8 @@
 # STEPTIONS - Stellar Options Protocol
 
-**STEPTIONS** is a decentralized options trading platform built on the Stellar blockchain. Here's a comprehensive overview:
+The First Options Protocol on Stellar. Insure any asset. Hedge price risk. Earn yield.
+
+Here's a comprehensive overview:
 
 ## 🚀 **What is STEPTIONS?**
 - **The First Options Protocol on Stellar** - A decentralized platform for trading cryptocurrency options
